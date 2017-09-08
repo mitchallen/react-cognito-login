@@ -58,7 +58,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['upcoming:patch','build']);
     grunt.registerTask('build-doc', ['jsdoc2md']);
-    grunt.registerTask("build",   ['build-doc']);
+    // grunt.registerTask("build",   ['build-doc']);
+    grunt.registerTask("build",   []);
     grunt.registerTask('pubinit', ['build','shell:pubinit']);
     grunt.registerTask('publish', ['upcoming:patch','build','bump','shell:publish']);
     grunt.registerTask('pubminor', ['upcoming:minor','build','bump:minor','shell:publish']);
