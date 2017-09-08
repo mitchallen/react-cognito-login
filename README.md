@@ -21,6 +21,8 @@ CognitoLogin React component
   </a>
 </p>
 
+# UNDER CONSTRUCTION
+
 ## Installation
 
     $ npm init
