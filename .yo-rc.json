@@ -1,0 +1,12 @@
+{
+  "generator-mitchallen-react-component": {
+    "promptValues": {
+      "scopeName": "mitchallen",
+      "bitbucketUser": "mitchallen",
+      "githubUser": "mitchallen",
+      "cirlcleCiUser": "mitchallen",
+      "codecovUser": "mitchallen",
+      "npmAuthor": "Mitch Allen"
+    }
+  }
+}
