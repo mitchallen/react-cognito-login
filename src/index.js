@@ -96,6 +96,7 @@ class CognitoLogin extends React.Component {
     try {
       const userToken = await this.login(this.state.username, this.state.password);
       this.props.updateUserToken(userToken);
+      this.setState({ isLoading: false });
       // this.props.history.push('/');
     } catch(e) {
       alert(e);
