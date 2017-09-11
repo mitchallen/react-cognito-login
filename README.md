@@ -129,6 +129,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.1.2
+
+* Added call to props.userHasAuthenticated(true) on successful login
+
 #### Version 0.1.1
 
 * Button reverts state when token updated
