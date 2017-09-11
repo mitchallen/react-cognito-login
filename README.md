@@ -132,6 +132,7 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 #### Version 0.1.2
 
 * Added call to props.userHasAuthenticated(true) on successful login
+* Removed call to props.updateUserToken
 
 #### Version 0.1.1
 

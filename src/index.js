@@ -95,7 +95,6 @@ class CognitoLogin extends React.Component {
 
     try {
       const userToken = await this.login(this.state.username, this.state.password);
-      this.props.updateUserToken(userToken);
       this.setState({ isLoading: false });
       this.props.userHasAuthenticated(true);
       // this.props.history.push('/');
@@ -139,7 +138,6 @@ class CognitoLogin extends React.Component {
 
 CognitoLogin.propTypes = {
   amazonCognitoIdentity: PropTypes.object.isRequired,
-  updateUserToken: PropTypes.func.isRequired,
   userHasAuthenticated: PropTypes.func.isRequired,
   cognitoUserPoolId: PropTypes.string.isRequired, 
   cognitoAppClientId: PropTypes.string.isRequired
