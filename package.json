@@ -1,6 +1,6 @@
 {
   "name": "@mitchallen/react-cognito-login",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React AWS Cognito login component",
   "main": "build/index.js",
   "scripts": {
