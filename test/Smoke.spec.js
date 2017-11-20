@@ -29,9 +29,9 @@ describe('CognitoLoginGui', () => {
     should.exist(result.props);
   });
 
-  it('default status should be ready', () => {
+  it('default status should be Login', () => {
     should.exist(result.props.status);
-    expect(result.props.status).to.eql('ready');
+    expect(result.props.status).to.eql('Login');
   });
 
   it('default username should be empty string', () => {
