@@ -33,12 +33,12 @@ React AWS Cognito login component
 1. Visit: https://aws.amazon.com/cognito/
 2. Create a user pool
 3. Create a test user in the user pool
-3. Create a React app
-4. Paste the code below into ```src/App.js```
-5. Create ```src/config.js``` and plug in your Cognito values for:
+4. Create a React app
+5. Paste the code below into ```src/App.js```
+6. Create ```src/config.js``` and plug in your Cognito values for:
  *  __User Pool ID__ 
  * __App Client ID__
-6. Run the app and login as the test user 
+7. Run the app and login as the test user 
 
 ### src/App.js
 
@@ -183,6 +183,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.2.1
+
+* fixed type-o's in success message and readme
 
 #### Version 0.2.0
 

@@ -101,7 +101,7 @@ class CognitoLoginGui extends React.Component {
 
 CognitoLoginGui.defaultProps = {
   submitMessage: 'submitting ...',
-  succcessMessage: 'You are loggged in!'
+  succcessMessage: 'You are logged in!'
 }
 
 CognitoLoginGui.propTypes = {
