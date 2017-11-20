@@ -1,6 +1,6 @@
 @mitchallen/react-cognito-login
 ==
-CognitoLogin React component
+React AWS Cognito login component
 --
 
 <p align="left">
@@ -21,8 +21,6 @@ CognitoLogin React component
   </a>
 </p>
 
-# UNDER CONSTRUCTION
-
 ## Installation
 
     $ npm init
@@ -32,20 +30,77 @@ CognitoLogin React component
 
 ## Usage
 
-1: Add this line near the top of your file (like ```src/App.js```):
+1. Visit: https://aws.amazon.com/cognito/
+2. Create a user pool
+3. Create a test user in the user pool
+3. Create a React app
+4. Paste the code below into ```src/App.js```
+5. Create ```src/config.js``` and plug in your Cognito values for:
+ *  __User Pool ID__ 
+ * __App Client ID__
+6. Run the app and login as the test user 
+
+### src/App.js
 
 ```
-import CognitoLogin from '@mitchallen/react-cognito-login';
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+import CognitoLoginGui from '@mitchallen/react-cognito-login';
+
+import { CognitoUserPoolId, CognitoAppClientId } from './config';
+
+const cognitoUserPoolId = CognitoUserPoolId;
+const cognitoAppClientId = CognitoAppClientId;
+
+class App extends Component {
+    
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
+
+  userHasAuthenticated = authenticated => {
+    this.setState({ isAuthenticated: authenticated });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Login Demo</h1>
+        </header>
+        <h4>cognitoUserPoolId={cognitoUserPoolId}</h4>
+        <h4>cognitoAppClientId={cognitoAppClientId}</h4>
+        <h4>authenticated: {this.state.isAuthenticated ? "true": "false"}</h4>
+        <CognitoLoginGui 
+          defaultStatus='Please login'
+          userHasAuthenticated={this.userHasAuthenticated}
+          cognitoUserPoolId={cognitoUserPoolId}
+          cognitoAppClientId={cognitoAppClientId}
+        />
+      </div>
+    );
+  }
+}
+
+export default App;
+
 ```
 
-__NOTE:__ CognitoLogin must be Capitalized or component won't render.
+### src/config.js
 
-2: Somewhere in the middle of the __render__ method add this line:
+Substitute your pool values:
 
 ```
-<CognitoLogin />
+export const CognitoUserPoolId = 'us-east-1_blah-blah-blah';
+export const CognitoAppClientId = '6ublahblahblahblahblahblah';
 ```
-
 
 * * *
 
@@ -90,15 +145,15 @@ $ npm link @mitchallen/react-cognito-login
 1: Add this line near the top:
 
 ```
-import CognitoLogin from '@mitchallen/react-cognito-login';
+import CognitoLoginGui from '@mitchallen/react-cognito-login';
 ```
 
-__NOTE:__ CognitoLogin must be Capitalized or component won't render.
+__NOTE:__ CognitoLoginGui must be Capitalized or component won't render.
 
 2: Somewhere in the middle of the __render__ method add this line:
 
 ```
-<CognitoLogin />
+<CognitoLoginGui />
 ```
 
 ### Run The Test App
@@ -128,6 +183,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.2.0
+
+* Total rewrite, not compatible with older versions
 
 #### Version 0.1.3
 

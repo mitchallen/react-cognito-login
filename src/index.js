@@ -5,55 +5,27 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LoaderButton from '@mitchallen/react-loader-button';
-import EmailInputField from '@mitchallen/react-email-input-field';
-import PasswordInputField from '@mitchallen/react-password-input-field';
-import CardGrey from '@mitchallen/react-card-grey';
-import { orange500, cyanA100, grey400 } from 'material-ui/styles/colors';
-import './CognitoLogin.css'; 
-// import {
-//   CognitoUserPool,
-//   AuthenticationDetails,
-//   CognitoUser
-// } from 'amazon-cognito-identity-js';
-// import config from '../config.js';
-// import { withRouter } from 'react-router-dom';
+import CognitoLoginFactory from '@mitchallen/cognito-login';
 
-const loginButtonStyle = {
-  margin: 20
-};
-
-const textFieldStyle = {
-  whiteStyle: {
-    color: '#FFFFFF',
-  },
-  hintStyle: {
-    color: grey400,
-  },
-  errorStyle: {
-    color: orange500,
-  },
-  underlineStyle: {
-    borderColor: grey400,
-  },
-  floatingLabelStyle: {
-    color: orange500,
-  },
-  floatingLabelFocusStyle: {
-    color: cyanA100,
-  },
-};
-
-class CognitoLogin extends React.Component {
+// TODO - pass in them from parent
+// Theme
+import LoginMaterialGreyTheme from './themes/login-material-grey-theme';
+ 
+class CognitoLoginGui extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: false,
+      status: this.props.defaultStatus || 'Login',
       username: '',
       password: '',
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   validateForm() {
@@ -67,80 +39,75 @@ class CognitoLogin extends React.Component {
     });
   }
 
-  login(username, password) {
-    const userPool = new this.props.amazonCognitoIdentity.CognitoUserPool({
-      UserPoolId: this.props.cognitoUserPoolId,
-      ClientId: this.props.cognitoAppClientId
-    });
-    const authenticationData = {
-      Username: username,
-      Password: password
-    };
-
-    const user = new this.props.amazonCognitoIdentity.CognitoUser({ Username: username, Pool: userPool });
-    const authenticationDetails = new this.props.amazonCognitoIdentity.AuthenticationDetails(authenticationData);
-
-    return new Promise((resolve, reject) => (
-      user.authenticateUser(authenticationDetails, {
-        onSuccess: (result) => resolve(result.getIdToken().getJwtToken()),
-        onFailure: (err) => reject(err),
-      })
-    ));
-  }
-
   handleSubmit = async (event) => {
+
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({ 
+      status: this.props.submitMessage, 
+      isLoading: true 
+    });
 
-    try {
-      const userToken = await this.login(this.state.username, this.state.password);
-      this.setState({ isLoading: false });
-      this.props.userHasAuthenticated(true);
-      // this.props.history.push('/');
-    } catch(e) {
-      alert(e);
-      this.setState({ isLoading: false });
-    }
+    CognitoLoginFactory.create({
+      userPoolId: this.props.cognitoUserPoolId,
+      clientId: this.props.cognitoAppClientId
+      // // *** TEMP ****
+      // userPoolId: process.env.COGNITO_TEST_USER_POOL_ID,
+      // clientId: process.env.COGNITO_TEST_CLIENT_ID
+    })
+    .then( obj => obj.login({
+            username: this.state.username,    
+            password: this.state.password 
+        })
+    )
+    .then( token => {
+        // console.log(token);
+        // user has successfully logged in
+        // update state or redux store
+        this.setState( { 
+          isLoading: false, 
+          status: this.props.succcessMessage 
+        }); 
+        this.props.userHasAuthenticated(true);
+    })
+    .catch( err => { 
+        // login failed 
+        this.setState({ 
+          isLoading: false, 
+          status: err.message 
+        });
+        console.error(err);
+    });
   }
 
   render() {
+
+    // var must start with cap or won't render
+    const DynamicTheme = this.props.theme || LoginMaterialGreyTheme;
+
     return (
-      <CardGrey>
-        <div className='Login'>
-          <form onSubmit={this.handleSubmit}>
-             <EmailInputField
-              id='username'
-              fieldStyle={textFieldStyle}
-              defaultValue={this.state.username}
-              onChange={this.handleChange}
-            />
-            <PasswordInputField
-              id='password'
-              fieldStyle={textFieldStyle}
-              defaultValue={this.state.password}
-              onChange={this.handleChange}
-            />
-            <LoaderButton
-              disabled={ !this.validateForm() }
-              type='submit'
-              primary 
-              style={loginButtonStyle}
-              isLoading={this.state.isLoading}
-              text='Log in'
-              loadingText='Logging in…' />
-          </form>
-        </div>
-      </CardGrey>
+      <DynamicTheme
+        handleChange={this.handleChange.bind(this)}
+        handleSubmit={this.handleSubmit.bind(this)}
+        validateForm={this.validateForm.bind(this)}
+        status={this.state.status}
+        isLoading={this.state.isLoading}
+        username={this.state.username}
+        password={this.state.password}
+      />
     );
   }
 }
 
-CognitoLogin.propTypes = {
-  amazonCognitoIdentity: PropTypes.object.isRequired,
+CognitoLoginGui.defaultProps = {
+  submitMessage: 'submitting ...',
+  succcessMessage: 'You are loggged in!'
+}
+
+CognitoLoginGui.propTypes = {
   userHasAuthenticated: PropTypes.func.isRequired,
-  cognitoUserPoolId: PropTypes.string.isRequired, 
+  cognitoUserPoolId: PropTypes.string.isRequired,
   cognitoAppClientId: PropTypes.string.isRequired
 };
 
-export default CognitoLogin;
+export default CognitoLoginGui;

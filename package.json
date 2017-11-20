@@ -1,7 +1,7 @@
 {
   "name": "@mitchallen/react-cognito-login",
   "version": "0.1.3",
-  "description": "CognitoLogin component",
+  "description": "React AWS Cognito login component",
   "main": "build/index.js",
   "scripts": {
     "pretest": "npm run build",
@@ -20,13 +20,14 @@
   "author": "Mitch Allen",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^15.5.4"
+    "react": ">=15.5.4"
   },
   "dependencies": {
-    "@mitchallen/react-card-grey": "^0.1.6",
-    "@mitchallen/react-email-input-field": "^0.1.5",
-    "@mitchallen/react-loader-button": "^0.1.7",
-    "@mitchallen/react-password-input-field": "^0.1.2",
+    "@mitchallen/cognito-login": "^0.1.1",
+    "@mitchallen/react-card-grey": "^0.1.7",
+    "@mitchallen/react-email-input-field": "^0.1.6",
+    "@mitchallen/react-loader-button": "^0.1.8",
+    "@mitchallen/react-password-input-field": "^0.1.3",
     "babel-cli": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.0.5",
@@ -53,6 +54,7 @@
     "css-loader": "^0.28.7",
     "enzyme": "^2.8.2",
     "eslint": "^4.5.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "grunt": "^1.0.1",
     "grunt-bump": "^0.8.0",
     "grunt-jsdoc-to-markdown": "^2.0.0",
@@ -60,7 +62,7 @@
     "grunt-upcoming": "^0.2.2",
     "isparta": "^4.0.0",
     "istanbul": "^0.4.5",
-    "jsdom": "^9.12.0",
+    "jsdom": "^11.4.0",
     "mocha": "^3.5.0",
     "nyc": "^11.1.0",
     "react-addons-test-utils": "^15.5.1",
