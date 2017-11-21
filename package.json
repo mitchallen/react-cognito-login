@@ -24,15 +24,11 @@
   },
   "dependencies": {
     "@mitchallen/cognito-login": "^0.1.1",
-    "@mitchallen/react-card-grey": "^0.1.7",
-    "@mitchallen/react-email-input-field": "^0.1.6",
-    "@mitchallen/react-loader-button": "^0.1.8",
-    "@mitchallen/react-password-input-field": "^0.1.3",
+    "@mitchallen/react-login-theme-grey": "^0.1.0",
     "babel-cli": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.0.5",
     "jsdom-global": "^3.0.2",
-    "material-ui": "^0.19.1",
     "prop-types": "^15.5.10",
     "webpack": "^3.5.5"
   },

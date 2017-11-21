@@ -184,6 +184,11 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.2.2
+
+* moved default theme to it's own package: 
+ * [@mitchallen/react-login-theme-grey](https://www.npmjs.com/package/@mitchallen/react-login-theme-grey)
+
 #### Version 0.2.1
 
 * fixed type-o's in success message and readme

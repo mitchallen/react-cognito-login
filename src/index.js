@@ -6,10 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CognitoLoginFactory from '@mitchallen/cognito-login';
-
-// TODO - pass in them from parent
-// Theme
-import LoginMaterialGreyTheme from './themes/login-material-grey-theme';
+import LoginThemeGrey from '@mitchallen/react-login-theme-grey';
  
 class CognitoLoginGui extends React.Component {
 
@@ -51,9 +48,6 @@ class CognitoLoginGui extends React.Component {
     CognitoLoginFactory.create({
       userPoolId: this.props.cognitoUserPoolId,
       clientId: this.props.cognitoAppClientId
-      // // *** TEMP ****
-      // userPoolId: process.env.COGNITO_TEST_USER_POOL_ID,
-      // clientId: process.env.COGNITO_TEST_CLIENT_ID
     })
     .then( obj => obj.login({
             username: this.state.username,    
@@ -82,8 +76,9 @@ class CognitoLoginGui extends React.Component {
 
   render() {
 
+    // TODO - code split
     // var must start with cap or won't render
-    const DynamicTheme = this.props.theme || LoginMaterialGreyTheme;
+    const DynamicTheme = this.props.theme || LoginThemeGrey;
 
     return (
       <DynamicTheme
