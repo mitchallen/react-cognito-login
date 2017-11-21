@@ -46,6 +46,7 @@ class CognitoLoginGui extends React.Component {
     });
 
     CognitoLoginFactory.create({
+      userPool: this.props.cognitoUserPool,
       userPoolId: this.props.cognitoUserPoolId,
       clientId: this.props.cognitoAppClientId
     })
@@ -101,8 +102,9 @@ CognitoLoginGui.defaultProps = {
 
 CognitoLoginGui.propTypes = {
   userHasAuthenticated: PropTypes.func.isRequired,
-  cognitoUserPoolId: PropTypes.string.isRequired,
-  cognitoAppClientId: PropTypes.string.isRequired
+  cognitoUserPool: PropTypes.string,
+  cognitoUserPoolId: PropTypes.string,
+  cognitoAppClientId: PropTypes.string,
 };
 
 export default CognitoLoginGui;

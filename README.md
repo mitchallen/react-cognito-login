@@ -102,6 +102,18 @@ export const CognitoUserPoolId = 'us-east-1_blah-blah-blah';
 export const CognitoAppClientId = '6ublahblahblahblahblahblah';
 ```
 
+## Existing Pool Option
+
+To use an existing pool, pass in it's value instead of the id's that are needed to create one.
+
+```
+<CognitoLoginGui 
+    defaultStatus='Please login'
+    userHasAuthenticated={this.userHasAuthenticated}
+    cognitoUserPool={this.state.cognitoUserPool}
+/>
+```
+
 * * *
 
 ## Testing
@@ -183,6 +195,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.2.4
+
+* Now have the option of passing in an existing CognitoUserPool 
 
 #### Version 0.2.3
 
