@@ -60,7 +60,7 @@ class CognitoLoginGui extends React.Component {
         // update state or redux store
         this.setState( { 
           isLoading: false, 
-          status: this.props.succcessMessage 
+          status: this.props.successMessage 
         }); 
         this.props.userHasAuthenticated(true);
     })
@@ -96,7 +96,7 @@ class CognitoLoginGui extends React.Component {
 
 CognitoLoginGui.defaultProps = {
   submitMessage: 'submitting ...',
-  succcessMessage: 'You are logged in!'
+  successMessage: 'You are logged in!'
 }
 
 CognitoLoginGui.propTypes = {

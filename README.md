@@ -184,6 +184,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.2.3
+
+* changed property succcessMessage (3 c's) to successMessage (2 c's)
+
 #### Version 0.2.2
 
 * moved default theme to it's own package: 
